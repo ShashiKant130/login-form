@@ -8,7 +8,7 @@ Multi-step signup UI built from the Figma assignment (React + TypeScript). No ba
 
 | | Link |
 |---|------|
-| **Live app** | _add your Vercel/Netlify URL here_ |
+| **Live app** | https://sk-login-form.netlify.app/ |
 ---
 
 ## What’s in the app
