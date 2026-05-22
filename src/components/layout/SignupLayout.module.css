@@ -1,9 +1,19 @@
 .page {
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--color-bg);
   position: relative;
-  overflow: hidden;
-  margin-top: 24px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 961px) {
+  .page {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
 }
 
 .waveBg {
@@ -18,19 +28,22 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
+  grid-template-columns: 1fr minmax(0, 708px);
+  align-items: start;
+  gap: 48px;
+  height: 100%;
   max-width: 1280px;
-  margin: 0px 48px 0px 80px;
-  /* padding: 48px 56px; */
-  /* gap: 48px; */
+  margin: 0 48px 0 80px;
+  padding: 48px 0;
   box-sizing: border-box;
 }
 
 .hero {
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
+  min-height: 0;
+  height: calc(100dvh - 96px);
+  overflow: hidden;
 }
 
 .eyebrow {
@@ -40,6 +53,7 @@
   font-weight: 300;
   font-family: var(--font-sans);
   line-height: 32px;
+  flex-shrink: 0;
 }
 
 .title {
@@ -48,6 +62,7 @@
   font-weight: 700;
   color: var(--color-text);
   line-height: 54px;
+  flex-shrink: 0;
 }
 
 .subtitle {
@@ -56,40 +71,54 @@
   font-weight: 400;
   color: var(--color-text);
   max-width: 340px;
+  flex-shrink: 0;
 }
 
 .heroImage {
   margin-top: auto;
   padding-top: 24px;
-  width: 600px;
-  aspect-ratio: 600/380;
+  width: 100%;
   max-width: 420px;
-  /* height: auto; */
+  height: auto;
+  max-height: min(380px, calc(100dvh - 352px));
+  object-fit: contain;
   display: block;
+  flex-shrink: 1;
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100%;
-  align-self: stretch;
+  align-items: stretch;
+  min-width: 0;
 }
 
 @media (max-width: 960px) {
   .container {
     grid-template-columns: 1fr;
-    padding: 32px 24px;
+    margin: 0 24px;
+    padding: 32px 0;
     gap: 32px;
+    height: auto;
   }
 
   .hero {
+    height: auto;
     text-align: center;
     align-items: center;
+    overflow: visible;
   }
 
   .subtitle {
     max-width: none;
+  }
+
+  .heroImage {
+    max-height: none;
+    margin-top: 24px;
+  }
+
+  .main {
+    align-items: center;
   }
 }

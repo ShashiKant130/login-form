@@ -1,12 +1,10 @@
 import { useCallback, useState } from 'react'
 import { useSignupWizard } from '../hooks/useSignupWizard'
 import {
-  validateConfirmPassword,
-  validateMobile,
-  validateName,
-  validateOtp,
-  validatePassword,
-} from '../utils/validation'
+  getStepErrors,
+  hasStepErrors,
+  type StepFieldErrors,
+} from '../utils/stepValidation'
 import { FormCard } from './layout/FormCard'
 import { SignupLayout } from './layout/SignupLayout'
 import { SuccessModal } from './SuccessModal'
@@ -17,43 +15,17 @@ import { OtpStep } from './steps/OtpStep'
 import { PasswordStep } from './steps/PasswordStep'
 import { StepNavigation } from './steps/StepNavigation'
 
-type FieldErrors = Record<string, string | undefined>
-
 export function SignupFlow() {
   const wizard = useSignupWizard()
-  const [errors, setErrors] = useState<FieldErrors>({})
+  const [errors, setErrors] = useState<StepFieldErrors>({})
 
   const clearErrors = () => setErrors({})
 
   const validateCurrentStep = useCallback((): boolean => {
-    const { currentStep, formData } = wizard
-    const nextErrors: FieldErrors = {}
-
-    switch (currentStep) {
-      case 'mobile':
-        nextErrors.mobile = validateMobile(formData.mobile)
-        break
-      case 'otp':
-        nextErrors.otp = validateOtp(formData.otp)
-        break
-      case 'name':
-        nextErrors.firstName = validateName(formData.firstName)
-        nextErrors.lastName = validateName(formData.lastName)
-        break
-      case 'password':
-        nextErrors.password = validatePassword(formData.password)
-        nextErrors.confirmPassword = validateConfirmPassword(
-          formData.password,
-          formData.confirmPassword,
-        )
-        break
-      default:
-        break
-    }
-
+    const nextErrors = getStepErrors(wizard.currentStep, wizard.formData)
     setErrors(nextErrors)
-    return !Object.values(nextErrors).some(Boolean)
-  }, [wizard])
+    return !hasStepErrors(nextErrors)
+  }, [wizard.currentStep, wizard.formData])
 
   const handleContinue = async () => {
     if (wizard.currentStep === 'accountType') {
@@ -88,9 +60,9 @@ export function SignupFlow() {
   }
 
   const renderStep = () => {
-    const { formData, updateField } = wizard
+    const { formData, updateField, currentStep } = wizard
 
-    switch (wizard.currentStep) {
+    switch (currentStep) {
       case 'accountType':
         return (
           <AccountTypeStep
@@ -156,7 +128,6 @@ export function SignupFlow() {
           <StepNavigation
             onBack={handleBack}
             onContinue={handleContinue}
-            showBack
             backDisabled={isFirstStep}
             loading={wizard.isLoading}
           />

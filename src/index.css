@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --color-primary: #0052ff;
+  --color-primary-hover: #0046dd;
+  --color-primary-light: #f0f5ff;
+  --color-text: #132C4A;
+  --color-text-muted: #0054FD;
+  --color-text-secondary: #565656;
+  --color-placeholder: #D9E0E6;
+  --color-bg: #f8f9fb;
+  --color-border: #e0e6ef;
+  --color-input-border: #729CF0;
+  --color-error: #dc3545;
+  --color-success: #22a06b;
+  --color-summary-bg: #F5F5F5;
+  --color-summary-label: #717680;
+  --color-summary-value: #181D27;
+  --color-label: #8292A1;
+  --font-sans: 'Rubik', system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+#root {
+  min-height: 100%;
+}
+
+button,
+input {
+  font-family: inherit;
+}
