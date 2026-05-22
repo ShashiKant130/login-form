@@ -3,6 +3,7 @@
   background: var(--color-bg);
   position: relative;
   overflow: hidden;
+  margin-top: 24px;
 }
 
 .waveBg {
@@ -20,9 +21,9 @@
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 48px 56px;
-  gap: 48px;
+  margin: 0px 48px 0px 80px;
+  /* padding: 48px 56px; */
+  /* gap: 48px; */
   box-sizing: border-box;
 }
 
@@ -60,9 +61,10 @@
 .heroImage {
   margin-top: auto;
   padding-top: 24px;
-  width: 100%;
+  width: 600px;
+  aspect-ratio: 600/380;
   max-width: 420px;
-  height: auto;
+  /* height: auto; */
   display: block;
 }
 

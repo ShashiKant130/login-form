@@ -9,7 +9,7 @@ interface SignupLayoutProps {
 export function SignupLayout({ children }: SignupLayoutProps) {
   return (
     <div className={styles.page}>
-      <div className={styles.waveBg} aria-hidden="true" />
+      {/* <div className={styles.waveBg} aria-hidden="true" /> */}
       <div className={styles.container}>
         <aside className={styles.hero}>
           <p className={styles.eyebrow}>Let&apos;s get started</p>

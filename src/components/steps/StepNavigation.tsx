@@ -53,7 +53,3 @@ export function StepNavigation({
 export function StepHeading({ children }: { children: React.ReactNode }) {
   return <h2 className={stepStyles.heading}>{children}</h2>
 }
-
-export function StepSubtext({ children }: { children: React.ReactNode }) {
-  return <p className={stepStyles.subtext}>{children}</p>
-}

@@ -16,12 +16,15 @@ export function FormCard({
   footer,
 }: FormCardProps) {
   return (
-    <div className={styles.card}>
+    <>
       {showProgress ? <ProgressBar percent={progressPercent} /> : null}
+    <div className={styles.card}>
+      {/* {showProgress ? <ProgressBar percent={progressPercent} /> : null} */}
       <div className={styles.body}>
         <div className={styles.content}>{children}</div>
         {footer ? <div className={styles.footer}>{footer}</div> : null}
       </div>
     </div>
+    </>
   )
 }
