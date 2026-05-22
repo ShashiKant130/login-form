@@ -1,6 +1,6 @@
 import arrowDown from '../../assets/arrow-down.png'
 import usaFlag from '../../assets/usa-flag.png'
-import { StepHeading } from './StepNavigation'
+import { StepHeading, StepShell } from './StepNavigation'
 import styles from './Steps.module.css'
 
 interface MobileStepProps {
@@ -11,7 +11,7 @@ interface MobileStepProps {
 
 export function MobileStep({ mobile, error, onChange }: MobileStepProps) {
   return (
-    <div className={styles.stepEnter}>
+    <StepShell>
       <StepHeading><strong>OTP Verification</strong></StepHeading>
       <div className={styles.fields}>
         <div>
@@ -36,12 +36,12 @@ export function MobileStep({ mobile, error, onChange }: MobileStepProps) {
             />
           </div>
           {error ? (
-            <p id="mobile-error" className={styles.subtext} style={{ color: 'var(--color-error)', marginTop: 8 }} role="alert">
+            <p id="mobile-error" className={styles.fieldError} role="alert">
               {error}
             </p>
           ) : null}
         </div>
       </div>
-    </div>
+    </StepShell>
   )
 }

@@ -1,5 +1,5 @@
 import { InputField } from '../ui/InputField'
-import { StepHeading } from './StepNavigation'
+import { StepHeading, StepShell } from './StepNavigation'
 import styles from './Steps.module.css'
 
 interface NameStepProps {
@@ -18,7 +18,7 @@ export function NameStep({
   onLastNameChange,
 }: NameStepProps) {
   return (
-    <div className={styles.stepEnter}>
+    <StepShell>
       <StepHeading><strong>What is your name?</strong></StepHeading>
       <div className={styles.fields}>
         <InputField
@@ -36,6 +36,6 @@ export function NameStep({
           error={errors.lastName}
         />
       </div>
-    </div>
+    </StepShell>
   )
 }

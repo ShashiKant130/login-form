@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { EyeIcon } from '../icons/Icons'
 import { InputField } from '../ui/InputField'
-import { StepHeading } from './StepNavigation'
+import {
+  CONFIRM_PASSWORD_MATCH_HINT,
+  PASSWORD_MIN_LENGTH_MESSAGE,
+} from '../../utils/validation'
+import { StepHeading, StepShell } from './StepNavigation'
 import styles from './Steps.module.css'
 
 interface PasswordStepProps {
@@ -12,6 +16,48 @@ interface PasswordStepProps {
   onConfirmChange: (v: string) => void
 }
 
+interface PasswordFieldProps {
+  label: string
+  placeholder: string
+  value: string
+  error?: string
+  hint?: string
+  onChange: (v: string) => void
+}
+
+function PasswordField({
+  label,
+  placeholder,
+  value,
+  error,
+  hint,
+  onChange,
+}: PasswordFieldProps) {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <InputField
+      label={label}
+      type={visible ? 'text' : 'password'}
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      error={error}
+      hint={hint}
+      rightElement={
+        <button
+          type="button"
+          className={styles.eyeBtn}
+          onClick={() => setVisible((v) => !v)}
+          aria-label={visible ? 'Hide password' : 'Show password'}
+        >
+          <EyeIcon open={visible} />
+        </button>
+      }
+    />
+  )
+}
+
 export function PasswordStep({
   password,
   confirmPassword,
@@ -19,45 +65,29 @@ export function PasswordStep({
   onPasswordChange,
   onConfirmChange,
 }: PasswordStepProps) {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirm, setShowConfirm] = useState(false)
-
-  const eyeToggle = (show: boolean, setShow: (v: boolean) => void) => (
-    <button
-      type="button"
-      className={styles.eyeBtn}
-      onClick={() => setShow(!show)}
-      aria-label={show ? 'Hide password' : 'Show password'}
-    >
-      <EyeIcon open={show} />
-    </button>
-  )
-
   return (
-    <div className={styles.stepEnter}>
-      <StepHeading><strong>Create Password for your account</strong></StepHeading>
+    <StepShell>
+      <StepHeading>
+        <strong>Create Password for your account</strong>
+      </StepHeading>
       <div className={styles.fields}>
-        <InputField
+        <PasswordField
           label="Enter new password"
-          type={showPassword ? 'text' : 'password'}
           placeholder="Enter new password"
           value={password}
-          onChange={(e) => onPasswordChange(e.target.value)}
           error={errors.password}
-          hint={!errors.password ? 'Must be atleast 6 characters' : undefined}
-          rightElement={eyeToggle(showPassword, setShowPassword)}
+          hint={!errors.password ? PASSWORD_MIN_LENGTH_MESSAGE : undefined}
+          onChange={onPasswordChange}
         />
-        <InputField
+        <PasswordField
           label="Confirm password"
-          type={showConfirm ? 'text' : 'password'}
           placeholder="Confirm password"
           value={confirmPassword}
-          onChange={(e) => onConfirmChange(e.target.value)}
           error={errors.confirmPassword}
-          hint={!errors.confirmPassword ? 'Both passwords must match' : undefined}
-          rightElement={eyeToggle(showConfirm, setShowConfirm)}
+          hint={!errors.confirmPassword ? CONFIRM_PASSWORD_MATCH_HINT : undefined}
+          onChange={onConfirmChange}
         />
       </div>
-    </div>
+    </StepShell>
   )
 }

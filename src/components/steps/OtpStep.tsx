@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { StepHeading } from './StepNavigation'
+import { StepHeading, StepShell } from './StepNavigation'
 import styles from './Steps.module.css'
 
 interface OtpStepProps {
@@ -58,7 +58,7 @@ export function OtpStep({ otp, error, onChange }: OtpStepProps) {
   }
 
   return (
-    <div className={styles.stepEnter}>
+    <StepShell>
       <StepHeading><strong>OTP Verification</strong></StepHeading>
       <p className={styles.otpSubText}>An OTP has been sent to your mobile number</p>
       <div className={styles.otpBlock}>
@@ -100,6 +100,6 @@ export function OtpStep({ otp, error, onChange }: OtpStepProps) {
           </button>
         </p>
       </div>
-    </div>
+    </StepShell>
   )
 }

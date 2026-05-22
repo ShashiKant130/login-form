@@ -1,6 +1,7 @@
+import checkIcon from '../../assets/check.png'
 import type { AccountType } from '../../types/signup'
-import { BriefcaseIcon, CheckIcon, PersonIcon } from '../icons/Icons'
-import { StepHeading } from './StepNavigation'
+import { BriefcaseIcon, PersonIcon } from '../icons/Icons'
+import { StepHeading, StepShell } from './StepNavigation'
 import styles from './Steps.module.css'
 
 interface AccountTypeStepProps {
@@ -10,7 +11,7 @@ interface AccountTypeStepProps {
 
 export function AccountTypeStep({ value, onChange }: AccountTypeStepProps) {
   return (
-    <div className={styles.stepEnter}>
+    <StepShell>
       <StepHeading>
         To join us tell us <strong>what type of account</strong> you are opening
       </StepHeading>
@@ -27,7 +28,7 @@ export function AccountTypeStep({ value, onChange }: AccountTypeStepProps) {
             Personal
           </span>
           <span className={styles.checkCircle}>
-            <CheckIcon />
+            <img src={checkIcon} alt="" className={styles.checkIcon} aria-hidden="true" />
           </span>
         </button>
         <button
@@ -42,10 +43,10 @@ export function AccountTypeStep({ value, onChange }: AccountTypeStepProps) {
             Business
           </span>
           <span className={styles.checkCircle}>
-            <CheckIcon />
+            <img src={checkIcon} alt="" className={styles.checkIcon} aria-hidden="true" />
           </span>
         </button>
       </div>
-    </div>
+    </StepShell>
   )
 }

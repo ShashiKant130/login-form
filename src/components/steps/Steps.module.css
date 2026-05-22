@@ -10,15 +10,15 @@
   font-weight: 500;
 }
 
-.subtext {
-  margin: 0px 0 24px;
+.fieldError {
+  margin: 8px 0 0;
   font-size: 14px;
-  color: var(--color-text-muted);
+  color: var(--color-error);
 }
 
 .mobileNumberText {
   display: block;
-  color: #8292A1;
+  color: var(--color-label);
   font-size: 14px;
   font-weight: 400;
   line-height: 16px;
@@ -75,7 +75,7 @@
 .accountOptionLeft {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24px;
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
@@ -87,10 +87,8 @@
 }
 
 .checkCircle {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--color-primary);
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,6 +102,13 @@
 .accountOption.selected .checkCircle {
   opacity: 1;
   transform: scale(1);
+}
+
+.checkIcon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .fields {
